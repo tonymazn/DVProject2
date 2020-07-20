@@ -19,7 +19,6 @@ var time = 0;
 var interval;
 var formattedData = [];
 
-var provincesList = ["British Columbia","Alberta","Saskatchewan","Manitoba","Ontario","Quebec","Newfoundland and Labrador","New Brunswick","Nova Scotia","Prince Edward Island","Yukon","Northwest Territories","Nunavut","Repatriated travellers"];
 
 // Scales
 var x = d3.scaleLog()
@@ -104,7 +103,6 @@ provincesList.forEach(function (continent, i) {
 
 d3.csv("data/canadacovid19.csv").then(function(data){
 	var provinces = [];
-    var startDate = data[0].date;	
 	var currentDate = data[0].date;
     for (var i=0; i<data.length;i++){
    	    var item = data[i];
