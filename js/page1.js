@@ -30,9 +30,31 @@ var y = d3.scaleLog()
     .range([height, 0])
     .domain([1, 9000]);
 var area = d3.scaleLinear()
-    .range([25*Math.PI, 1500*Math.PI])
+    .range([25*Math.PI, 2000*Math.PI])
     .domain([0, 3500000]);
 var continentColor = d3.scaleOrdinal(d3.schemePastel1);
+
+//legend
+var legend = g.append("g")
+    .attr("transform", "translate(" + (width - 10) + "," + (height - 250) + ")");
+
+provincesList.forEach(function(continent, i) {
+    var legendRow = legend.append("g")
+        .attr("transform", "translate(0, " + (i*12 + 30) + ")");
+
+    legendRow.append("rect")
+        .attr("width", 10)
+        .attr("height", 10)
+        .attr("fill", continentColor(continent));
+
+    legendRow.append("text")
+        .attr("x", -10)
+        .attr("y", 10)
+        .attr("text-anchor", "end")
+        .style("text-transform", "capitalize")
+        .style("font-size", 9)
+        .text(continent);
+});
 
 // Labels
 var xLabel = g.append("text")
@@ -116,7 +138,7 @@ d3.csv("data/canadacovid19.csv").then(function(data){
 function update(data) {
     // Standard transition time for the visualization
     var t = d3.transition()
-        .duration(100);
+        .duration(250);
 
     // JOIN new data with old elements.
     var circles = g.selectAll("circle").data(data, function(d){
