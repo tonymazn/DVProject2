@@ -80,7 +80,7 @@ g.append("g")
 
 //legend
 var legend = g.append("g")
-    .attr("transform", "translate(" + (width - 10) + "," + (height - 250) + ")");
+    .attr("transform", "translate(" + (width - 10) + "," + (height - 260) + ")");
 
 provincesList.forEach(function (continent, i) {
     var legendRow = legend.append("g")

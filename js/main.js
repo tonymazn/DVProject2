@@ -2,7 +2,7 @@ var provincesList = ["British Columbia", "Alberta", "Saskatchewan", "Manitoba", 
 
 
 $(document).ready(function () {
-    $('.page1').hide();
-    //$('.page2').hide();
+    //$('.page1').hide();
+    $('.page2').hide();
 });
 
