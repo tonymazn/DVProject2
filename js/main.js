@@ -2,9 +2,9 @@ var provincesList = ["British Columbia", "Alberta", "Saskatchewan", "Manitoba", 
 
 
 $(document).ready(function () {
-    $('.page1').show();
-    $('.page2').hide();
-    $('.page3').hide();
+    $(".page2").empty();
+    $(".page3").empty();
+    $(".main").load("page1.html")
     $.getScript("js/page1.js");
 });
 
@@ -17,24 +17,21 @@ $('#pagination-here').bootpag({
     $("#content").html("Page " + num); // or some ajax content loading...
 
     if (num == 1) {
-        $("#chart-area").html("");
-        $(".page1").show();
-        $(".page2").hide();
-        $(".page3").hide();
+        $(".page2").empty();
+        $(".page3").empty();
+        $(".main").load("page1.html")
         $.getScript("js/page1.js");
     }
     if (num == 2) {
-        $(".page1").hide();
-        $(".page2").show();
-        $(".page3").hide();
-        $("#chart-area").html("");
+        $(".page1").empty();
+        $(".page3").empty();
+        $(".main").load("page2.html")
         $.getScript("js/page2.js");
     }
     if (num == 3) {
-        $(".page1").hide();
-        $(".page2").hide();
-        $(".page3").show();
-        $("#chart-area").html("");
+        $(".page1").empty();
+        $(".page2").empty();
+        $(".main").load("page3.html")
         $.getScript("js/page3.js");
     }
 

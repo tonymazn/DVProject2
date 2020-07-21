@@ -1,1 +1,37 @@
-<script src="js/page2.js"></script>
+<div class="container page2">
+    <div class="row">
+        <div id="left-charts" class="col-sm-12 col-md-8">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Dates: <span id="dateLabel1">03-11-2020</span> to <span id="dateLabel2">07-17-2020</span></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <select id="var-select" class="form-control">
+                        <option selected value="numconf">Confirmed Case</option>
+                        <option value="numdeaths">Deaths</option>
+                        <option value="numtested">Tested</option>
+                    </select>
+                </div>
+            </div>
+            <div id="stacked-area"></div>
+            <div id="timeline"></div>
+        </div>
+        <div id="right-charts" class="col-md-4 col-sm-12">
+            <div class="row">
+                <div class="col-sm-6 col-md-12" id="confirmed-case"></div>
+                <div class="col-sm-6 col-md-12" id="deaths"></div>
+                <div class="col-sm-6 col-md-12" id="tested"></div>
+                <div class="col-sm-6 col-md-12" id="call-duration"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap grid setup -->
+<div class="container page2">
+    <div class="row">
+        <div id="chart-area"></div>
+    </div>
+</div>

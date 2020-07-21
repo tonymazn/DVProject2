@@ -129,8 +129,8 @@ d3.csv("data/canadacovid19.csv").then(function(data){
 
 })
 
-$("#play-button")
-    .on("click", function () {
+$("body")
+    .on("click", "#play-button", function () {
         var button = $(this);
         if (button.text() == "Play") {
             button.text("Pause");
@@ -143,8 +143,8 @@ $("#play-button")
 
 
 
-$("#reset-button")
-    .on("click", function() {
+$("body")
+    .on("click", "#reset-button", function() {
         time = 0;
         update(formattedData[0]);
     })
