@@ -14,6 +14,10 @@ $(document).ready(function () {
         $.getScript("js/page2.js");
         return true;
     });
+    $(".page3").load("page3.html", function () {
+        $.getScript("js/page3.js");
+        return true;
+    });
 
     $(".page2").hide();
     $(".page3").hide();

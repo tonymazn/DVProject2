@@ -56,3 +56,13 @@ body {
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+
+.counties {
+	fill: none;
+}
+
+.states {
+	fill: none;
+	stroke: #fff;
+	stroke-linejoin: round;
+}
