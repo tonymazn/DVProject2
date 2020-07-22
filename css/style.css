@@ -4,10 +4,6 @@
     display: block;
 }
 
-#logo {
-    height: 50px;
-}
-
 .navbar-brand {
     height: 60px;
     padding: 5px 0px;
@@ -22,13 +18,13 @@ body {
     font: 10px sans-serif;
 }
 
-    .axis path,
-    .axis line {
-        fill: none;
-        stroke: #D4D8DA;
-        stroke-width: 2px;
-        shape-rendering: crispEdges;
-    }
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #D4D8DA;
+    stroke-width: 2px;
+    shape-rendering: crispEdges;
+}
 
 .line {
     fill: none;
@@ -73,4 +69,3 @@ body {
     stroke-width: .5px;
     stroke-opacity: .5;
 }
-
