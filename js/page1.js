@@ -13,15 +13,14 @@ var page1_x;
 var page1_y;
 var page1_timeLabel;
 
-Page1 = function (_parentElement, _options) {
+Page1 = function (_parentElement, _parameters) {
     this._parentElement = _parentElement;
-    this._options = _options;
 
-    this.initVis(this._parentElement, this._options);
+    this.initVis(this._parentElement, _parameters);
 }
 
 
-Page1.prototype.initVis = function (_parentElement, _options) {
+Page1.prototype.initVis = function (_parentElement, _parameters) {
     var vis = this;
 
     margin = { left: 80, right: 20, top: 50, bottom: 100 };
@@ -50,13 +49,13 @@ Page1.prototype.initVis = function (_parentElement, _options) {
     page1_continentColor = d3.scaleOrdinal(d3.schemePastel1);
 
     // Labels
-    var xLabel = page1_g.append("text")
+    page1_g.append("text")
         .attr("y", height + 50)
         .attr("x", width / 2)
         .attr("font-size", "20px")
         .attr("text-anchor", "middle")
         .text("Number of confirmed case");
-    var yLabel = page1_g.append("text")
+    page1_g.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", -40)
         .attr("x", -170)
@@ -163,6 +162,12 @@ Page1.prototype.initVis = function (_parentElement, _options) {
         })
 }
 
+Page1.prototype.trigger = function (_parameters) {
+    _parameters.currentPage = 1;
+
+}
+
+
 Page1.prototype.step = function () {
     page1_time = (page1_time < page1_formattedData.length) ? page1_time + 1 : 0;
     update(page1_formattedData[page1_time]);
@@ -170,23 +175,23 @@ Page1.prototype.step = function () {
 
 function update(data) {
     // Standard transition time for the visualization
-    t = d3.transition()
+    var t = d3.transition()
         .duration(250);
 
     // JOIN new data with old elements.
-    circles = page1_g.selectAll("circle").data(data, function (d) {
+    var circles = page1_g.selectAll("circle").data(data, function (d) {
         return d.prname;
     });
 
     // EXIT old elements not present in new data.
-    //circles.exit()
-    //    .attr("class", "exit")
-    //    .remove();
+    circles.exit()
+        //.attr("class", "exit")
+        .remove();
 
     // ENTER new elements present in new data.
     circles.enter()
         .append("circle")
-        .attr("class", "enter")
+        //.attr("class", "enter")
         .attr("fill", function (d) { return page1_continentColor(d.prname); })
         .merge(circles)
         .transition(t)

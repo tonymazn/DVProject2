@@ -69,3 +69,7 @@ body {
     stroke-width: .5px;
     stroke-opacity: .5;
 }
+
+.ui-widget-header .ui-icon {
+    background-image: url(images/ui-icons_444444_256x240.png);
+} 

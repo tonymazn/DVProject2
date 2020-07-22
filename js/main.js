@@ -2,26 +2,36 @@
 //var parseTime = d3.timeParse("%d-%m-%Y");
 //var formatTime = d3.timeFormat("%d-%m-%Y");
 
-var target;
+var _parameters = {
+    currentPage: 1,
+    startDate: common_parseTime("11-03-2020"),
+    endDate: common_parseTime("17-07-2020"),
+    minDate: common_parseTime("11-03-2020"),
+    maxDate: common_parseTime("17-07-2020"),
+    type: "numconf"
+};
+var page1;
+var page2;
+var page3;
+
 
 $(document).ready(function () {
+
+
     $(".page1").hide();
     $(".page2").hide();
     $(".page3").hide();
 
     $(".page1").load("page1.html", function () {
-        //$.getScript("js/page1.js");
-        new Page1(this, target);
+        page1 = new Page1(this, _parameters);
         return true;
     });
     $(".page2").load("page2.html", function () {
-        //$.getScript("js/page2.js");
-        new Page2(this, target);
+        page2 = new Page2(this, _parameters);
         return true;
     });
     $(".page3").load("page3.html", function () {
-        //$.getScript("js/page3.js");
-        new Page3(this, target);
+        page3 = new Page3(this, _parameters);
         return true;
     });
 
@@ -38,16 +48,19 @@ $(document).ready(function () {
         $("#content").html("Page " + num); // or some ajax content loading...
 
         if (num == 1) {
+            page1.trigger(_parameters);
             $(".page2").hide();
             $(".page3").hide();
             $(".page1").show();
         }
         if (num == 2) {
+            page2.trigger(_parameters);
             $(".page2").show();
             $(".page3").hide();
             $(".page1").hide();
         }
         if (num == 3) {
+            page3.trigger(_parameters);
             $(".page1").hide();
             $(".page2").hide();
             $(".page3").show();

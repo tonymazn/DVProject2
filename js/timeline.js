@@ -40,13 +40,11 @@ Timeline.prototype.initVis = function(){
     vis.areaPath = vis.g.append("path")
         .attr("fill", "#ccc");
 
-    // Initialize brush component
     vis.brush = d3.brushX()
         .handleSize(10)
         .extent([[0, 0], [vis.width, vis.height]])
         .on("brush end", brushed)
 
-    // Append brush component
     vis.brushComponent = vis.g.append("g")
         .attr("class", "brush")
         .call(vis.brush);
