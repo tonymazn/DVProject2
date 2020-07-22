@@ -6,7 +6,7 @@
 
 StackedAreaChart = function(_parentElement){
     this.parentElement = _parentElement;
-    this.common = new Common();
+
     this.initVis();
 };
 
@@ -42,10 +42,10 @@ StackedAreaChart.prototype.initVis = function(){
         .attr("class", "y axis");
 
     vis.stack = d3.stack()
-        .keys(this.common.provincesList);
+        .keys(common_provincesList);
 
     vis.area = d3.area()
-        .x(function (d) { return vis.x(vis.common.parseTime(d.data.date)); })
+        .x(function (d) { return vis.x(common_parseTime(d.data.date)); })
         .y0(function(d) { return vis.y(d[0]); })
         .y1(function(d) { return vis.y(d[1]); });
 
@@ -61,8 +61,8 @@ StackedAreaChart.prototype.wrangleData = function(){
     vis.variable = $("#var-select").val()
 
     vis.dayNest = d3.nest()
-        .key(function (d) { return vis.common.formatTime(d.date); })
-        .entries(calls)
+        .key(function (d) { return common_formatTime(d.date); })
+        .entries(page2_calls)
 
     vis.dataFiltered = vis.dayNest
         .map(function(day){
@@ -101,7 +101,7 @@ StackedAreaChart.prototype.updateVis = function(){
     });
 
     // Update scales
-    vis.x.domain(d3.extent(vis.dataFiltered, (d) => { return this.common.parseTime(d.date); }));
+    vis.x.domain(d3.extent(vis.dataFiltered, (d) => { return common_parseTime(d.date); }));
     vis.y.domain([0, vis.maxDateVal]);
 
     // Update axes

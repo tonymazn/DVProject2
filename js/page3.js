@@ -6,7 +6,7 @@
 Page3 = function (_parentElement, _options) {
     this._parentElement = _parentElement;
     this._options = _options;
-    this.common = new Common();
+
     this.initVis();
 }
 

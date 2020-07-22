@@ -5,7 +5,6 @@
 
 Timeline = function (_parentElement) {
     this.parentElement = _parentElement;
-    this.common = new Common();
     this.initVis();
 };
 
@@ -61,8 +60,8 @@ Timeline.prototype.wrangleData = function(){
     vis.variable = "numconf"
 
     vis.dayNest = d3.nest()
-        .key(function (d) { return vis.common.formatTime(d.date); })
-        .entries(calls)
+        .key(function (d) { return common_formatTime(d.date); })
+        .entries(page2_calls)
 
     vis.dataFiltered = vis.dayNest
         .map(function(day){
@@ -81,7 +80,7 @@ Timeline.prototype.wrangleData = function(){
 Timeline.prototype.updateVis = function(){
     var vis = this;
 
-    vis.x.domain(d3.extent(vis.dataFiltered, (d) => { return this.common.parseTime(d.date); }));
+    vis.x.domain(d3.extent(vis.dataFiltered, (d) => { return common_parseTime(d.date); }));
     vis.y.domain([0, d3.max(vis.dataFiltered, (d) => d.sum) ])
 
     vis.xAxisCall.scale(vis.x)
@@ -89,12 +88,12 @@ Timeline.prototype.updateVis = function(){
     vis.xAxis.transition(vis.t()).call(vis.xAxisCall)
 
     vis.area0 = d3.area()
-        .x((d) => { return vis.x(this.common.parseTime(d.date)); })
+        .x((d) => { return vis.x(common_parseTime(d.date)); })
         .y0(vis.height)
         .y1(vis.height);
 
     vis.area = d3.area()
-        .x((d) => { return vis.x(this.common.parseTime(d.date)); })
+        .x((d) => { return vis.x(common_parseTime(d.date)); })
         .y0(vis.height)
         .y1((d) => { return vis.y(d.sum); })
 

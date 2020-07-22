@@ -16,8 +16,6 @@ var page1_timeLabel;
 Page1 = function (_parentElement, _options) {
     this._parentElement = _parentElement;
     this._options = _options;
-    this.common = new Common();
-    //this.formattedData = [];
 
     this.initVis(this._parentElement, this._options);
 }
@@ -99,7 +97,7 @@ Page1.prototype.initVis = function (_parentElement, _options) {
     var legend = page1_g.append("g")
         .attr("transform", "translate(" + (width - 10) + "," + (height - 260) + ")");
 
-    vis.common.provincesList.forEach(function (continent, i) {
+    common_provincesList.forEach(function (continent, i) {
         var legendRow = legend.append("g")
             .attr("transform", "translate(0, " + (i * 12 + 30) + ")");
 

@@ -3,21 +3,20 @@
 *    Project 2 - ZM11 (Zhouning Ma)
 */
 
-var allCalls;
-var calls;
-var nestedCalls;
+var page2_allCalls;
+var page2_calls;
+var page2_nestedCalls;
 
 Page2 = function (_parentElement, _options) {
     this._parentElement = _parentElement;
     this._options = _options;
-    this.common = new Common();
+
     this.initVis();
 }
 
 
 Page2.prototype.initVis = function (_parentElement, _options) {
     d3.csv("data/canadacovid19.csv").then(function (data) {
-        var common = new Common();
         newdata = [];
         data.map(function (d) {
             var item = [];
@@ -25,23 +24,23 @@ Page2.prototype.initVis = function (_parentElement, _options) {
             item.numdeaths = +d.numdeaths
             item.numtested = +d.numtested
             item.prname = d.prname
-            item.date = common.parseTime(d.date)
+            item.date = common_parseTime(d.date)
             item.team = d.prname
             newdata.push(item);
             return d
         })
 
-        allCalls = newdata;
+        page2_allCalls = newdata;
 
-        calls = newdata;
+        page2_calls = newdata;
 
         console.log(newdata);
 
-        nestedCalls = d3.nest()
+        page2_nestedCalls = d3.nest()
             .key(function (d) {
                 return d.category;
             })
-            .entries(calls)
+            .entries(page2_calls)
 
         //donut = new DonutChart("#confirmed-case")
 
@@ -63,22 +62,22 @@ Page2.prototype.initVis = function (_parentElement, _options) {
 function brushed() {
     var selection = d3.event.selection || timeline.x.range();
     var newValues = selection.map(timeline.x.invert)
-    this.changeDates(newValues)
+    changeDates(newValues)
 }
 
-Page2.prototype.changeDates = function(values) {
-    calls = allCalls.filter(function (d) {
+function changeDates(values) {
+    page2_calls = page2_allCalls.filter(function (d) {
         return ((d.date > values[0]) && (d.date < values[1]))
     })
 
-    nestedCalls = d3.nest()
+    page2_nestedCalls = d3.nest()
         .key(function (d) {
             return d.prname;
         })
-        .entries(calls)
+        .entries(page2_calls)
 
-    $("#dateLabel1").text(this.common.formatTime(values[0]))
-    $("#dateLabel2").text(this.common.formatTime(values[1]))
+    $("#dateLabel1").text(common_formatTime(values[0]))
+    $("#dateLabel2").text(common_formatTime(values[1]))
 
     //donut.wrangleData();
     numdeathsBar.wrangleData();
