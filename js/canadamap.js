@@ -4,6 +4,7 @@
 */
 
 
+var format = d3.format(",");
 CanadaMap = function () {
     console.log("start CanadaMap");
     this.initVis();
@@ -123,16 +124,19 @@ CanadaMap.prototype.ready = function (svg, color, canada) {
         .enter().append("text")
         .attr("x", function (d) { return d[0]; })
         .attr("y", function (d) { return d[1]; })
-        .style("fill", "black")
+        .style("fill", "#C8C8C8")
         .attr("text-anchor", "middle")
         .text(function (d, i) { return continents[i].properties.province; });
+
 
     svg.selectAll(".name").data(centroids)
         .enter().append("text")
         .attr("x", function (d) { return d[0]; })
         .attr("y", function (d) { return d[1] + 15; })
         .style("fill", "black")
+        .attr("font-weight", "bold")
+        .attr("font-family", "Open Sans")
         .attr("text-anchor", "middle")
-        .text(function (d, i) { return "(8000)"; });
+        .text(function (d, i) { return format("8000"); });
 
 }

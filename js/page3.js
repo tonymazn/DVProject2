@@ -3,26 +3,21 @@
 *    Project 2 - ZM11 (Zhouning Ma)
 */
 
-var parseTime = d3.timeParse("%d-%m-%Y");
-var formatTime = d3.timeFormat("%d-%m-%Y");
+Page3 = function (_parentElement, _options) {
+    this._parentElement = _parentElement;
+    this._options = _options;
+    this.common = new Common();
+    this.initVis();
+}
 
 
-// Add jQuery UI slider
-$("#date-slider").slider({
-    range: true,
-    max: parseTime("03-11-2020").getTime(),
-    min: parseTime("07-17-2020").getTime(),
-    step: 86400000, // One day
-    values: [parseTime("03-11-2020").getTime(), parseTime("07-17-2020").getTime()],
-    slide: function (event, ui) {
-        $("#dateLabel1").text(formatTime(new Date(ui.values[0])));
-        $("#dateLabel2").text(formatTime(new Date(ui.values[1])));
-        update();
-    }
-});
+Page3.prototype.initVis = function (_parentElement, _options) {
+    $("#datepicker").datepicker();
+    new CanadaMap();
+    this.update();
+}
 
-function update() {
+Page3.prototype.update = function() {
     var sliderValues = $("#date-slider").slider("values");  
 }
 
-new CanadaMap();

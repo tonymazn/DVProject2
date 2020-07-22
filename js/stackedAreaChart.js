@@ -3,9 +3,10 @@
 *    Project 2 - ZM11 (Zhouning Ma)
 */
 
+
 StackedAreaChart = function(_parentElement){
     this.parentElement = _parentElement;
-
+    this.common = new Common();
     this.initVis();
 };
 
@@ -40,13 +41,11 @@ StackedAreaChart.prototype.initVis = function(){
     vis.yAxis = vis.g.append("g")
         .attr("class", "y axis");
 
-    console.log(provincesList);
-
     vis.stack = d3.stack()
-        .keys(provincesList);
+        .keys(this.common.provincesList);
 
     vis.area = d3.area()
-        .x(function(d) { return vis.x(parseTime(d.data.date)); })
+        .x(function (d) { return vis.x(vis.common.parseTime(d.data.date)); })
         .y0(function(d) { return vis.y(d[0]); })
         .y1(function(d) { return vis.y(d[1]); });
 
@@ -62,7 +61,7 @@ StackedAreaChart.prototype.wrangleData = function(){
     vis.variable = $("#var-select").val()
 
     vis.dayNest = d3.nest()
-        .key(function(d){ return formatTime(d.date); })
+        .key(function (d) { return vis.common.formatTime(d.date); })
         .entries(calls)
 
     vis.dataFiltered = vis.dayNest
@@ -102,7 +101,7 @@ StackedAreaChart.prototype.updateVis = function(){
     });
 
     // Update scales
-    vis.x.domain(d3.extent(vis.dataFiltered, (d) => {  return parseTime(d.date); }));
+    vis.x.domain(d3.extent(vis.dataFiltered, (d) => { return this.common.parseTime(d.date); }));
     vis.y.domain([0, vis.maxDateVal]);
 
     // Update axes
