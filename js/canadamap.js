@@ -15,7 +15,7 @@ CanadaMap.prototype.initVis = function () {
 
     var margin = { left: 10, right: 20, top: 10, bottom: 10 };
     var height = 600 - margin.top - margin.bottom,
-        width = 1000 - margin.left - margin.right;
+        width = 900 - margin.left - margin.right;
 
     var svg = d3.select(".page3")
         .append("svg")
@@ -71,7 +71,7 @@ CanadaMap.prototype.initVis = function () {
     //End of legend
 
 
-
+    var centroids;
     var promises = [
         d3.json("data/can.json"),
         d3.tsv("data/map.tsv", function (d) { numberofcase.set(d.id, +d.rate); })
@@ -96,10 +96,43 @@ CanadaMap.prototype.ready = function (svg, color, canada) {
         .attr("fill", function (d) { return color(d.rate = 3); })
         .attr("d", path)
         .append("title")
-        .text(function (d) { return 2.0 + "%"; });
+        .text("31234");
+        //.text(function (d) { return 2.0 + "%"; });
 
     svg.append("path")
         .datum(topojson.mesh(canada, canada.objects.prov, function (a, b) { return a !== b; }))
         .attr("class", "states")
         .attr("d", path);
+
+    var continents = topojson.feature(canada, canada.objects.prov).features;
+    var centroids = [
+        [260, 460], //British Columbia
+        [690, 460], //Quebec
+        [480, 290], //Nunavut
+        [810, 520], //Prince Edward Island
+        [410, 480], //Saskatchewan
+        [230, 290], //Yukon
+        [490, 450], //Manitoba 
+        [580, 520], //Ontario
+        [790, 550], //New Brunswick
+        [370, 350], //Northwest Territories
+        [340, 440], //Alberta
+        [800, 420]]; //Newfoundland and Labrador
+
+    svg.selectAll(".name").data(centroids)
+        .enter().append("text")
+        .attr("x", function (d) { return d[0]; })
+        .attr("y", function (d) { return d[1]; })
+        .style("fill", "black")
+        .attr("text-anchor", "middle")
+        .text(function (d, i) { return continents[i].properties.province; });
+
+    svg.selectAll(".name").data(centroids)
+        .enter().append("text")
+        .attr("x", function (d) { return d[0]; })
+        .attr("y", function (d) { return d[1] + 15; })
+        .style("fill", "black")
+        .attr("text-anchor", "middle")
+        .text(function (d, i) { return "(8000)"; });
+
 }
