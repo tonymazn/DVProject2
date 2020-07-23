@@ -54,7 +54,7 @@ Timeline.prototype.initVis = function(){
 
 Timeline.prototype.wrangleData = function(){
     var vis = this;
-
+    console.log("Timeline.prototype.wrangleData");
     vis.variable = "numconf"
 
     vis.dayNest = d3.nest()
@@ -77,6 +77,7 @@ Timeline.prototype.wrangleData = function(){
 
 Timeline.prototype.updateVis = function(){
     var vis = this;
+    console.log("Timeline.prototype.updateVis");
 
     vis.x.domain(d3.extent(vis.dataFiltered, (d) => { return common_parseTime(d.date); }));
     vis.y.domain([0, d3.max(vis.dataFiltered, (d) => d.sum) ])

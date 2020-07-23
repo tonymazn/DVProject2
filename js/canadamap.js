@@ -3,8 +3,6 @@
 *    Project 2 - ZM11 (Zhouning Ma)
 */
 
-
-var format = d3.format(",");
 CanadaMap = function () {
     console.log("start CanadaMap");
     this.initVis();
@@ -24,8 +22,6 @@ CanadaMap.prototype.initVis = function () {
         .attr("height", height + margin.top + margin.bottom);
 
     var numberofcase = d3.map();
-
-
 
     //legend
     var x = d3.scaleLinear()
@@ -71,8 +67,7 @@ CanadaMap.prototype.initVis = function () {
 
     //End of legend
 
-
-    var centroids;
+    //read data
     var promises = [
         d3.json("data/can.json"),
         d3.tsv("data/map.tsv", function (d) { numberofcase.set(d.id, +d.rate); })
@@ -104,7 +99,6 @@ CanadaMap.prototype.ready = function (svg, color, canada) {
         .datum(topojson.mesh(canada, canada.objects.prov, function (a, b) { return a !== b; }))
         .attr("class", "states")
         .attr("d", path);
-
     var continents = topojson.feature(canada, canada.objects.prov).features;
     var centroids = [
         [260, 460], //British Columbia
@@ -119,6 +113,7 @@ CanadaMap.prototype.ready = function (svg, color, canada) {
         [370, 350], //Northwest Territories
         [340, 440], //Alberta
         [800, 420]]; //Newfoundland and Labrador
+
 
     svg.selectAll(".name").data(centroids)
         .enter().append("text")
@@ -137,6 +132,8 @@ CanadaMap.prototype.ready = function (svg, color, canada) {
         .attr("font-weight", "bold")
         .attr("font-family", "Open Sans")
         .attr("text-anchor", "middle")
-        .text(function (d, i) { return format("8000"); });
+        .text(function (d, i) { return common_formatnumber("8000"); });
+
 
 }
+

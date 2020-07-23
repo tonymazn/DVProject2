@@ -68,17 +68,16 @@ Page2.prototype.trigger = function (_parameters) {
     $("#dateLabel1").text(start);
     $("#dateLabel2").text(end);
     stackedArea.wrangleData();
-    var startDate = _parameters.startDate;
-    var endDate = _parameters.endDate;
-    var changedate = [ startDate, endDate ];
-console.log("chagneDate")
-    console.log(changedate);
-    changeDates(changedate);
-    //page2_timeline.updateVis();
-    page2_timeline.wrangleData();
+    changeDates([_parameters.startDate, _parameters.endDate]);
+}
+
+function setTimelineXRange(range) {
+    page2_timeline.x.range()
 }
 
 function brushed() {
+    console.log("d3.event.selection");
+    console.log(d3.event.selection);
     var selection = d3.event.selection || page2_timeline.x.range();
     var newValues = selection.map(page2_timeline.x.invert)
     changeDates(newValues)

@@ -174,33 +174,32 @@ Page1.prototype.step = function () {
 }
 
 function update(data) {
-    // Standard transition time for the visualization
     var t = d3.transition()
         .duration(250);
 
-    // JOIN new data with old elements.
     var circles = page1_g.selectAll("circle").data(data, function (d) {
         return d.prname;
     });
 
-    // EXIT old elements not present in new data.
-    circles.exit()
-        //.attr("class", "exit")
-        .remove();
+    try {
+        circles.exit()
+            //.attr("class", "exit")
+            .remove();
 
-    // ENTER new elements present in new data.
-    circles.enter()
-        .append("circle")
-        //.attr("class", "enter")
-        .attr("fill", function (d) { return page1_continentColor(d.prname); })
-        .merge(circles)
-        .transition(t)
-        .attr("cy", function (d) { return page1_y(d.numdeaths + 1); })
-        .attr("cx", function (d) { return page1_x(d.numconf + 100); })
-        .attr("r", function (d) { return Math.sqrt(page1_area(d.numtested) / Math.PI); });
+        circles.enter()
+            .append("circle")
+            //.attr("class", "enter")
+            .attr("fill", function (d) { return page1_continentColor(d.prname); })
+            .merge(circles)
+            .transition(t)
+            .attr("cy", function (d) { return page1_y(d.numdeaths + 1); })
+            .attr("cx", function (d) { return page1_x(d.numconf + 100); })
+            .attr("r", function (d) { return Math.sqrt(page1_area(d.numtested) / Math.PI); });
 
-    // Update the time label
-    page1_timeLabel.text(data[0].date);
+        // Update the time label
+        page1_timeLabel.text(data[0].date);
+    } catch{
+    }
 }
 
 

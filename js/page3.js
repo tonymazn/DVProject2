@@ -2,13 +2,13 @@
 *    Page3.js
 *    Project 2 - ZM11 (Zhouning Ma)
 */
+var page3_canadamap;
 
 Page3 = function (_parentElement, _parameters) {
     this._parentElement = _parentElement;
 
     this.initVis(_parentElement, _parameters);
 }
-
 
 Page3.prototype.initVis = function (_parentElement, _parameters) {
     $("#datepicker").datepicker({
@@ -17,7 +17,7 @@ Page3.prototype.initVis = function (_parentElement, _parameters) {
         maxDate: _parameters.maxDate
     });
 
-    new CanadaMap();
+    page3_canadamap = new CanadaMap();
 
     $("#datepicker").on('change', function () {
         _parameters.endDate = endDate = common_parseTime($("#datepicker").val());
@@ -31,7 +31,7 @@ Page3.prototype.initVis = function (_parentElement, _parameters) {
         _parameters.type = $("#type-select").val();
         page3Update(_parentElement, _parameters)
     });
-    page3Update(_parentElement, _parameters);
+    page3Update(_parameters);
 }
 
 
@@ -41,11 +41,10 @@ Page3.prototype.trigger = function (_parameters) {
     $("#type-select").val(_parameters.type);
     $("#datepicker").datepicker("setDate",_parameters.endDate);
 
-    stackedArea.wrangleData();
 }
 
 
-function page3Update(_parentElement, _parameters) {
+function page3Update(_parameters) {
 
 
 }
