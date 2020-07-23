@@ -99,8 +99,8 @@ function changeDates(values) {
     $("#dateLabel1").text(common_formatTime(values[0]))
     $("#dateLabel2").text(common_formatTime(values[1]))
 
-//    _parameters.startDate = values[0];
-//    _parameters.endDate = values[1];
+    _parameters.startDate = values[0];
+    _parameters.endDate = values[1];
 
     numdeathsBar.wrangleData();
     testedBar.wrangleData();

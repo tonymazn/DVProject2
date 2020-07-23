@@ -39,7 +39,7 @@ Page3.prototype.trigger = function (_parameters) {
     _parameters.currentPage = 3;
 
     $("#type-select").val(_parameters.type);
-    $("#datepicker").datepicker("setDate", _parameters.endDate);
+    $("#datepicker").datepicker("setDate",_parameters.endDate);
 
     stackedArea.wrangleData();
 }
