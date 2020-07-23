@@ -129,21 +129,22 @@ CanadaMap.prototype.updateVis = function (data) {
         [820, 580]]; //Newfoundland and Labrador
 
 
+    $(".numbertitleclass").remove();
     canadamap_svg.selectAll(".name").data(centroids)
         .enter().append("text")
+        .attr("class", "numbertitleclass")
         .attr("x", function (d) { return d[0]; })
         .attr("y", function (d) { return d[1]; })
         .style("fill", "#C8C8C8")
         .attr("text-anchor", "middle")
         .text(function (d, i) { return continents[i].properties.province; });
 
+
     if (data) {
-        canadamap_svg.exit()
-            .attr("class", "numbertitle")
-            .remove();
+        $(".numberclass").remove();
         canadamap_svg.selectAll(".name").data(centroids)
             .enter().append("text")
-            .attr("class", "numbertitle")
+            .attr("class", "numberclass")
             .attr("x", function (d) { return d[0]; })
             .attr("y", function (d) { return d[1] + 15; })
             .style("fill", "black")
