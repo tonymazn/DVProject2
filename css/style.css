@@ -77,3 +77,23 @@ body {
 .form-inline {
     margin-left:15px;
 }
+
+h2 {
+    color: #888888;
+}
+
+#page3total {
+    margin: 150px 0px 0px 100px;
+}
+
+#page3totalnumber {
+    margin:20px 0px 0px 100px;
+}
+
+#page2total {
+    margin-left:30px;
+}
+
+#page2totalnumber {
+    margin-left: 30px;
+}
