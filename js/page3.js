@@ -62,6 +62,7 @@ Page3.prototype.trigger = function (_parameters) {
     $("#type-select").val(_parameters.type);
     $("#datepicker").datepicker("setDate", _parameters.endDate);
 
+    page3Update(_parameters);
 }
 
 
@@ -89,19 +90,12 @@ function page3GetData(date, type) {
     reorderResult[1] = result[5]; //Quebec
     reorderResult[11] = result[6]; //Newfoundland and Labrador
     reorderResult[8] = result[7]; //New Brunswick
-
     reorderResult[12] = result[8]; //Northwest Territories
-
-
     reorderResult[3] = result[9]; //Prince Edward Island
     reorderResult[5] = result[10]; //Yukon
     reorderResult[9] = result[11]; //Northwest Territories
     reorderResult[2] = result[12]; // Nunavut
 
-
-
-//    console.log("result[12]");
-//    console.log(result[12]);
     return reorderResult;
 }
 

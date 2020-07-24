@@ -52,18 +52,21 @@ $(document).ready(function () {
             $(".page2").hide();
             $(".page3").hide();
             $(".page1").show();
+            page1.trigger(_parameters);
         }
         if (num == 2) {
             page2.trigger(_parameters);
             $(".page2").show();
             $(".page3").hide();
             $(".page1").hide();
+            page2.trigger(_parameters);
         }
         if (num == 3) {
             page3.trigger(_parameters);
             $(".page1").hide();
             $(".page2").hide();
             $(".page3").show();
+            page3.trigger(_parameters);
         }
 
 

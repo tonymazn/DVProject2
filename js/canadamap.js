@@ -28,13 +28,13 @@ CanadaMap.prototype.initVis = function () {
 
     var numberofcase = d3.map();
 
-    //legend
     var x = d3.scaleLinear()
         .domain([1, 10])
         .rangeRound([height, width]);
 
+    //legend
     canadamap_color = d3.scaleThreshold()
-        .domain(d3.range(2, 10))
+        .domain(d3.range(1, 10))
         .range(d3.schemeBlues[9]);
 
     var g = canadamap_svg.append("g")
@@ -65,7 +65,25 @@ CanadaMap.prototype.initVis = function () {
 
     g.call(d3.axisBottom(x)
         .tickSize(13)
-        .tickFormat(function (x, i) { return i ? x : x + "%"; })
+        .tickFormat(function (x, i) {
+            if (i == 0) {
+                return "10";
+            } else if (i == 1) {
+                return "100";
+            } else if (i == 2) {
+                return "1K";
+            } else if (i == 3) {
+                return "10K";
+            } else if (i == 4) {
+                return "100K";
+            } else if (i == 5) {
+                return "1M";
+            } else if (i == 6) {
+                return "10M";
+            } else {
+                return "100M";
+            }
+        })
         .tickValues(canadamap_color.domain()))
         .select(".domain")
         .remove();
@@ -89,18 +107,47 @@ CanadaMap.prototype.initVis = function () {
 
 }
 
+function getColorLevel(item) {
+    if (item < 10) {
+        return 0;
+    } else if (item < 100) {
+        return 1;
+    } else if (item < 1000) {
+        return 2;
+    } else if (item < 10000) {
+        return 3;
+    } else if (item < 100000) {
+        return 4;
+    } else if (item < 1000000) {
+        return 5;
+    } else if (item < 10000000) {
+        return 6;
+    } else {
+        return 7;
+    }
+}
 
 CanadaMap.prototype.updateVis = function (data) {
+    console.log("data");
+    console.log(data);
+    if (!data) {
+        return;
+    }
+
     var path = d3.geoPath();
     canadamap_svg.append("g")
         .attr("class", "counties")
         .selectAll("path")
-        .data(topojson.feature(canadamap_mapdata, canadamap_mapdata.objects.nation).features)
+        .data(topojson.feature(canadamap_mapdata, canadamap_mapdata.objects.prov).features)
         .enter().append("path")
-        .attr("fill", function (d) { return canadamap_color(d.rate = 3); })
+        .attr("fill", function (d, i) {
+            console.log("getColorLevel(data[i])");
+            console.log(d);
+            console.log(getColorLevel(data[i]));
+            return canadamap_color(getColorLevel(data[i]));        })
         .attr("d", path)
         .append("title")
-        .text("31234");
+        .text(function (d, i) { return data[i] });
     //.text(function (d) { return 2.0 + "%"; });
 
 
@@ -135,25 +182,25 @@ CanadaMap.prototype.updateVis = function (data) {
         .attr("class", "numbertitleclass")
         .attr("x", function (d) { return d[0]; })
         .attr("y", function (d) { return d[1]; })
-        .style("fill", "#C8C8C8")
+        .style("fill", "#C8C8C8")  //white color font
         .attr("text-anchor", "middle")
         .text(function (d, i) { return continents[i].properties.province; });
 
 
-    if (data) {
-        $(".numberclass").remove();
-        canadamap_svg.selectAll(".name").data(centroids)
-            .enter().append("text")
-            .attr("class", "numberclass")
-            .attr("x", function (d) { return d[0]; })
-            .attr("y", function (d) { return d[1] + 15; })
-            .style("fill", "black")
-            .attr("font-weight", "bold")
-            .attr("font-family", "Open Sans")
-            .attr("text-anchor", "middle")
-            .text(function (d, i) { return common_formatnumber(data[i]); });
+    $(".numberclass").remove();
+    canadamap_svg.selectAll(".name").data(centroids)
+        .enter().append("text")
+        .attr("class", "numberclass")
+        .attr("x", function (d) { return d[0]; })
+        .attr("y", function (d) { return d[1] + 15; })
+        .style("fill", "#333")
+        .attr("font-weight", "bold")
+        .attr("font-family", "Open Sans")
+        .attr("text-anchor", "middle")
+        .text(function (d, i) { return common_formatnumber(data[i]); });
 
-    }
 
 }
+
+
 
