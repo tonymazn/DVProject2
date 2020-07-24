@@ -18,7 +18,7 @@ CanadaMap.prototype.initVis = function () {
     var vis = this;
 
     var margin = { left: 10, right: 20, top: 10, bottom: 10 };
-    var height = 600 - margin.top - margin.bottom,
+    var height = 700 - margin.top - margin.bottom,
         width = 900 - margin.left - margin.right;
 
     canadamap_svg = d3.select(".page3")
