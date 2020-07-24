@@ -19,7 +19,7 @@ CanadaMap.prototype.initVis = function () {
 
     var margin = { left: 10, right: 20, top: 10, bottom: 10 };
     var height = 700 - margin.top - margin.bottom,
-        width = 900 - margin.left - margin.right;
+        width = 1000 - margin.left - margin.right;
 
     canadamap_svg = d3.select(".page3")
         .append("svg")
@@ -39,7 +39,7 @@ CanadaMap.prototype.initVis = function () {
 
     var g = canadamap_svg.append("g")
         .attr("class", "key")
-        .attr("transform", "translate(50,40)");
+        .attr("transform", "translate(20,40)");
 
     g.selectAll("rect")
         .data(canadamap_color.range().map(function (d) {
@@ -148,8 +148,7 @@ CanadaMap.prototype.updateVis = function (data) {
         .attr("d", path)
         .append("title")
         .text(function (d, i) { return data[i] });
-    //.text(function (d) { return 2.0 + "%"; });
-
+    
 
     console.log("canadamap_mapdata");
     console.log(canadamap_mapdata);
