@@ -67,21 +67,21 @@ CanadaMap.prototype.initVis = function () {
         .tickSize(13)
         .tickFormat(function (x, i) {
             if (i == 0) {
-                return "10";
+                return "-1K";
             } else if (i == 1) {
-                return "100";
+                return "-100";
             } else if (i == 2) {
-                return "1K";
+                return "-10";
             } else if (i == 3) {
-                return "10K";
+                return "0";
             } else if (i == 4) {
-                return "100K";
+                return "1K";
             } else if (i == 5) {
-                return "1M";
+                return "10K";
             } else if (i == 6) {
-                return "10M";
+                return "1M";
             } else {
-                return "100M";
+                return "10M";
             }
         })
         .tickValues(canadamap_color.domain()))
@@ -108,19 +108,13 @@ CanadaMap.prototype.initVis = function () {
 }
 
 function getColorLevel(item) {
-    if (item < 10) {
-        return 0;
-    } else if (item < 100) {
-        return 1;
-    } else if (item < 1000) {
-        return 2;
-    } else if (item < 10000) {
+    if (item <= 0) {
         return 3;
-    } else if (item < 100000) {
+    } else if (item < 1000) {
         return 4;
-    } else if (item < 1000000) {
+    } else if (item < 10000) {
         return 5;
-    } else if (item < 10000000) {
+    } else if (item < 1000000) {
         return 6;
     } else {
         return 7;
