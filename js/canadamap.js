@@ -18,7 +18,7 @@ CanadaMap.prototype.initVis = function () {
     var vis = this;
 
     var margin = { left: 10, right: 20, top: 10, bottom: 10 };
-    var height = 700 - margin.top - margin.bottom,
+    var height = 650 - margin.top - margin.bottom,
         width = 1000 - margin.left - margin.right;
 
     canadamap_svg = d3.select(".page3")
@@ -39,7 +39,7 @@ CanadaMap.prototype.initVis = function () {
 
     var g = canadamap_svg.append("g")
         .attr("class", "key")
-        .attr("transform", "translate(20,40)");
+        .attr("transform", "translate(20,20)");
 
     g.selectAll("rect")
         .data(canadamap_color.range().map(function (d) {
