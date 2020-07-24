@@ -72,4 +72,8 @@ body {
 
 .ui-widget-header .ui-icon {
     background-image: url(images/ui-icons_444444_256x240.png);
-} 
+}
+
+.form-inline {
+    margin-left:15px;
+}
