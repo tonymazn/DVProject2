@@ -48,7 +48,7 @@ Page2.prototype.initVis = function (_parentElement, _parameters) {
         // Type change
         $("#var-select").on("change", function () {
             _parameters.type = $("#var-select").val();
-            stackedArea.wrangleData();
+            changeDates([_parameters.startDate, _parameters.endDate])
         })
     })
 }
