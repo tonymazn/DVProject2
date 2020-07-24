@@ -98,8 +98,8 @@ CanadaMap.prototype.initVis = function () {
 
     Promise.all(promises).then(function (data) {
         canadamap_mapdata = data[0];
-        console.log("canadamap_mapdata");
-        console.log(canadamap_mapdata);
+//        console.log("canadamap_mapdata");
+//        console.log(canadamap_mapdata);
         vis.updateVis(null);
     }).catch(function (error) {
         console.log(error);
@@ -140,19 +140,13 @@ CanadaMap.prototype.updateVis = function (data) {
         .selectAll("path")
         .data(topojson.feature(canadamap_mapdata, canadamap_mapdata.objects.prov).features)
         .enter().append("path")
-        .attr("fill", function (d, i) {
-            console.log("getColorLevel(data[i])");
-            console.log(d);
-            console.log(getColorLevel(data[i]));
-            return canadamap_color(getColorLevel(data[i]));        })
+        .attr("fill", function (d, i) {return canadamap_color(getColorLevel(data[i]));})
         .attr("d", path)
         .append("title")
         .text(function (d, i) { return data[i] });
-    
 
-    console.log("canadamap_mapdata");
-    console.log(canadamap_mapdata);
-
+ //   console.log("canadamap_mapdata");
+ //   console.log(canadamap_mapdata);
 
     canadamap_svg.append("path")
         .datum(topojson.mesh(canadamap_mapdata, canadamap_mapdata.objects.prov, function (a, b) { return a !== b; }))

@@ -31,11 +31,8 @@ Page2.prototype.initVis = function (_parentElement, _parameters) {
         })
 
         page2_allCalls = newdata;
-
         page2_calls = newdata;
-
         console.log(newdata);
-
         page2_nestedCalls = d3.nest()
             .key(function (d) {
                 return d.category;
@@ -45,9 +42,7 @@ Page2.prototype.initVis = function (_parentElement, _parameters) {
         numconfBar = new BarChart("#numconf", "numconf", "numconf")
         numdeathsBar = new BarChart("#numdeaths", "numdeaths", "numdeaths")
         testedBar = new BarChart("#numtested", "numtested", "numtested")
-
         stackedArea = new StackedAreaChart("#stacked-area")
-
         page2_timeline = new Timeline("#timeline")
 
         // Type change
@@ -83,10 +78,10 @@ function brushed() {
     changeDates(newValues)
 }
 
-// Date range chagne
+// Date range change
 function changeDates(values) {
     page2_calls = page2_allCalls.filter(function (d) {
-        return ((d.date > values[0]) && (d.date < values[1]))
+        return ((d.date >= values[0]) && (d.date <= values[1]))
     })
 
     page2_nestedCalls = d3.nest()
@@ -95,6 +90,18 @@ function changeDates(values) {
         })
         .entries(page2_calls)
 
+    var type = $("#var-select").val();
+    var totalrow = page2_calls[page2_calls.length - 1];
+    var total = 0
+    if (type == "numconf") {
+        total = totalrow.numconf;
+    } else if (type == "numdeaths") {
+        total = totalrow.numdeaths;
+    } else {
+        total = totalrow.numtested;
+    }
+
+    $("#page2totalnumber").text(common_formatnumber(total));
     $("#dateLabel1").text(common_formatTime(values[0]))
     $("#dateLabel2").text(common_formatTime(values[1]))
 

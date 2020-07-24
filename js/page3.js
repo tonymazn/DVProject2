@@ -71,7 +71,7 @@ function page3GetData(date, type) {
     var formatteddate = common_formatTime(date);
     var records = page3_data.filter(function (d) { return common_formatTime(d.date) == formatteddate; });
     var result = [];
-    for (var i = 0; i < 13; i++) {
+    for (var i = 0; i < 15; i++) {
         if (type == "numconf") {
             result.push(records[i].numconf);
         } else if (type == "numdeaths") {
@@ -81,7 +81,7 @@ function page3GetData(date, type) {
         }
     };
 
-    var reorderResult = new Array(13);
+    var reorderResult = new Array(14);
     reorderResult[0] = result[0]; //British Columbia
     reorderResult[10] = result[1];  //Alberta
     reorderResult[4] = result[2]; //Saskatchewan
@@ -96,6 +96,8 @@ function page3GetData(date, type) {
     reorderResult[9] = result[11]; //Northwest Territories
     reorderResult[2] = result[12]; // Nunavut
 
+    reorderResult[13] = result[14]; // Canada
+
     return reorderResult;
 }
 
@@ -104,13 +106,14 @@ function page3GetData(date, type) {
 function page3Update(_parameters) {
     var endDate = _parameters.endDate;
     var type = _parameters.type;
-
-    console.log(endDate);
-    console.log(type);
-
     var data = page3GetData(endDate, type);
-    console.log("data");
-    console.log(data);
+    var total = data[13];
+    data.pop();  // remove total
+
+    console.log("total");
+    console.log(total);
+
+    $("#page3totalnumber").text(common_formatnumber(total));
     page3_canadamap.updateVis(data);
 }
 
