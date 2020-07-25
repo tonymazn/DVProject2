@@ -25,7 +25,7 @@ Page1.prototype.initVis = function (_parentElement, _parameters) {
 
     margin = { left: 80, right: 20, top: 50, bottom: 100 };
     height = 500 - margin.top - margin.bottom,
-    width = 800 - margin.left - margin.right;
+        width = 800 - margin.left - margin.right;
 
     page1_g = d3.select(_parentElement).select("#chart-area")
         .append("svg")
@@ -46,7 +46,32 @@ Page1.prototype.initVis = function (_parentElement, _parameters) {
     page1_area = d3.scaleLinear()
         .range([25 * Math.PI, 2000 * Math.PI])
         .domain([0, 3500000]);
-    page1_continentColor = d3.scaleOrdinal(d3.schemePastel1);
+
+
+    //d3.schemeBlues[9]
+    //d3.schemeSet1
+    //page1_continentColor = d3.scaleOrdinal(d3.schemePaired);
+
+    page1_continentColor = d3.scaleOrdinal()
+        .domain(common_provincesList)
+        .range(["#a6cee3",  //"British Columbia"
+            "#1f78b4",  //"Alberta"
+            "#b2df8a",  //"Saskatchewan"
+            "#33a02c",  //"Manitoba"
+            "#fb9a99",  // "Ontario"
+            "#e31a1c", // "Quebec"
+            "#fdbf6f", // "Newfoundland and Labrador"
+            "#ff7f00", // "New Brunswick"
+            "#cab2d6", // "Nova Scotia"
+            "#6a3d9a", // "Prince Edward Island"
+            "#0331fc", // "Yukon"
+            "#b15928", // "Northwest Territories"
+            "#a6cee3", // "Nunavut"
+            "#1f78b4"  // "Repatriated travellers"
+        ]);
+
+
+    //page1_continentColor = d3.scaleOrdinal(d3.schemePastel1);
 
     // Labels
     page1_g.append("text")

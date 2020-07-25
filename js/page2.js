@@ -92,16 +92,21 @@ function changeDates(values) {
 
     var type = $("#var-select").val();
     var totalrow = page2_calls[page2_calls.length - 1];
-    var total = 0
-    if (type == "numconf") {
-        total = totalrow.numconf;
-    } else if (type == "numdeaths") {
-        total = totalrow.numdeaths;
-    } else {
-        total = totalrow.numtested;
+
+    console.log("totalrow");
+    console.log(totalrow);
+    if (totalrow) {
+        var total = 0
+        if (type == "numconf") {
+            total = totalrow.numconf;
+        } else if (type == "numdeaths") {
+            total = totalrow.numdeaths;
+        } else {
+            total = totalrow.numtested;
+        }
+        $("#page2totalnumber").text(common_formatnumber(total));
     }
 
-    $("#page2totalnumber").text(common_formatnumber(total));
     $("#dateLabel1").text(common_formatTime(values[0]))
     $("#dateLabel2").text(common_formatTime(values[1]))
 
