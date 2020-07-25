@@ -124,7 +124,7 @@ function getColorLevel(item) {
 CanadaMap.prototype.updateVis = function (data) {
     console.log("data");
     console.log(data);
-    if (!data || !canadamap_mapdata.objects) {
+    if (!data || !canadamap_mapdata || !canadamap_mapdata.objects) {
         return;
     }
 
