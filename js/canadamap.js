@@ -18,7 +18,7 @@ CanadaMap.prototype.initVis = function () {
     var vis = this;
 
     var margin = { left: 10, right: 20, top: 10, bottom: 10 };
-    var height = 650 - margin.top - margin.bottom,
+    var height = 700 - margin.top - margin.bottom,
         width = 1000 - margin.left - margin.right;
 
     canadamap_svg = d3.select(".page3")
@@ -39,7 +39,7 @@ CanadaMap.prototype.initVis = function () {
 
     var g = canadamap_svg.append("g")
         .attr("class", "key")
-        .attr("transform", "translate(20,20)");
+        .attr("transform", "translate(-200,20)");
 
     g.selectAll("rect")
         .data(canadamap_color.range().map(function (d) {
@@ -131,6 +131,7 @@ CanadaMap.prototype.updateVis = function (data) {
     var path = d3.geoPath();
     canadamap_svg.append("g")
         .attr("class", "counties")
+        .attr("transform", "translate(-150,50)")
         .selectAll("path")
         .data(topojson.feature(canadamap_mapdata, canadamap_mapdata.objects.prov).features)
         .enter().append("path")
@@ -145,6 +146,7 @@ CanadaMap.prototype.updateVis = function (data) {
     canadamap_svg.append("path")
         .datum(topojson.mesh(canadamap_mapdata, canadamap_mapdata.objects.prov, function (a, b) { return a !== b; }))
         .attr("class", "states")
+        .attr("transform", "translate(-150,50)")
         .attr("d", path);
     var continents = topojson.feature(canadamap_mapdata, canadamap_mapdata.objects.prov).features;
     var centroids = [
@@ -166,6 +168,7 @@ CanadaMap.prototype.updateVis = function (data) {
     $(".numbertitleclass").remove();
     canadamap_svg.selectAll(".name").data(centroids)
         .enter().append("text")
+        .attr("transform", "translate(-150,50)")
         .attr("class", "numbertitleclass")
         .attr("x", function (d) { return d[0]; })
         .attr("y", function (d) { return d[1]; })
@@ -178,6 +181,7 @@ CanadaMap.prototype.updateVis = function (data) {
     canadamap_svg.selectAll(".name").data(centroids)
         .enter().append("text")
         .attr("class", "numberclass")
+        .attr("transform", "translate(-150,50)")
         .attr("x", function (d) { return d[0]; })
         .attr("y", function (d) { return d[1] + 15; })
         .style("fill", "#333")
