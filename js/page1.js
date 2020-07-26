@@ -61,7 +61,7 @@ Page1.prototype.initVis = function (_parentElement, _parameters) {
             "#fb9a99",  // "Ontario"
             "#e31a1c", // "Quebec"
             "#fdbf6f", // "Newfoundland and Labrador"
-            "#ff7f00", // "New Brunswick"
+            "#3386FF", // "New Brunswick"
             "#cab2d6", // "Nova Scotia"
             "#6a3d9a", // "Prince Edward Island"
             "#0331fc", // "Yukon"
