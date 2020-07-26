@@ -1,8 +1,3 @@
-/*
-*    Page3.js
-*    Project 2 - ZM11 (Zhouning Ma)
-*/
-
 var canadamap_color;
 var canadamap_svg;
 var canadamap_mapdata;

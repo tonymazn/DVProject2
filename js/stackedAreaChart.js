@@ -1,9 +1,3 @@
-/*
-*    stackedAreaChart.js
-*    Project 2 - ZM11 (Zhouning Ma)
-*/
-
-
 StackedAreaChart = function (_parentElement) {
     this.parentElement = _parentElement;
 

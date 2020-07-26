@@ -1,8 +1,3 @@
-/*
-*    barChart.js
-*    Project 2 - ZM11 (Zhouning Ma)
-*/
-
 BarChart = function(_parentElement, _variable, _title){
     this.parentElement = _parentElement;
     this.variable = _variable;

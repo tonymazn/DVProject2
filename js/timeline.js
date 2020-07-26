@@ -1,7 +1,3 @@
-/*
-*    timeline.js
-*    Project 2 - ZM11 (Zhouning Ma)
-*/
 
 Timeline = function (_parentElement) {
     this.parentElement = _parentElement;
@@ -52,7 +48,9 @@ Timeline.prototype.initVis = function(){
     vis.wrangleData();
 };
 
-Timeline.prototype.wrangleData = function(){
+Timeline.prototype.wrangleData = function () {
+    console.log("Timeline.prototype.wrangleData");
+
     var vis = this;
     console.log("Timeline.prototype.wrangleData");
     vis.variable = "numconf"
