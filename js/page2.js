@@ -1,8 +1,3 @@
-/*
-*    Page2.js
-*    Project 2 - ZM11 (Zhouning Ma)
-*/
-
 var page2_allCalls;
 var page2_calls;
 var page2_nestedCalls;

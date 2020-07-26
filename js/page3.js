@@ -1,7 +1,3 @@
-/*
-*    Page3.js
-*    Project 2 - ZM11 (Zhouning Ma)
-*/
 var page3_canadamap;
 var page3_data = [];
 

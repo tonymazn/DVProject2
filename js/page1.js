@@ -1,8 +1,3 @@
-/*
-*    Page1.js
-*    Project 2 - ZM11 (Zhouning Ma)
-*/
-
 var page1_formattedData = [];
 var page1_time = 0;
 var page1_continentColor;
