@@ -84,22 +84,20 @@ BarChart.prototype.wrangleData = function(){
 
 BarChart.prototype.updateVis = function(){
     var vis = this;
+    //console.log("BarChart.prototype.updateVis");
 
-    // Update scales
     vis.y.domain([0, d3.max(vis.dataFiltered, (d) => { return +d.size; })]);
 
-    // Update axes
     vis.xAxisCall.scale(vis.x);
     vis.xAxis.transition(vis.t()).call(vis.xAxisCall);
     vis.yAxisCall.scale(vis.y);
     vis.yAxis.transition(vis.t()).call(vis.yAxisCall);
 
-    // JOIN new data with old elements.
-    vis.rects = vis.g.selectAll("rect").data(vis.dataFiltered, function(d){
+    vis.rects = vis.g.selectAll("rect").data(vis.dataFiltered, function (d) {
+        //console.log(d.category);
         return d.category;
     });
 
-    // EXIT old elements not present in new data.
     vis.rects.exit()
         .attr("class", "exit")
         .transition(vis.t())
@@ -108,7 +106,6 @@ BarChart.prototype.updateVis = function(){
         .style("fill-opacity", "0.1")
         .remove();
 
-    // UPDATE old elements present in new data.
     vis.rects.attr("class", "update")
         .transition(vis.t())
             .attr("y", function(d){ return vis.y(d.size); })
@@ -116,7 +113,6 @@ BarChart.prototype.updateVis = function(){
             .attr("x", function(d){ return vis.x(d.category) })
             .attr("width", vis.x.bandwidth)
 
-    // ENTER new elements present in new data.
     vis.rects.enter()
         .append("rect")
         .attr("class", "enter")

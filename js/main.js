@@ -13,8 +13,6 @@ var page3;
 
 
 $(document).ready(function () {
-
-
     $(".page1").hide();
     $(".page2").hide();
     $(".page3").hide();
@@ -66,8 +64,6 @@ $(document).ready(function () {
             page3.trigger(_parameters);
         }
 
-
-        // ... after content load -> change total to 3
         $(this).bootpag({ total: 3, maxVisible: 3 });
     });
 

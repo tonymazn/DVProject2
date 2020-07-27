@@ -4,8 +4,9 @@ Timeline = function (_parentElement) {
     this.initVis();
 };
 
-Timeline.prototype.initVis = function(){
+Timeline.prototype.initVis = function () {
     var vis = this;
+    //console.log("Start Timeline.prototype.initVis");
 
     vis.margin = {top: 0, right: 100, bottom: 20, left: 80};
     vis.width = 800 - vis.margin.left - vis.margin.right;
@@ -49,10 +50,12 @@ Timeline.prototype.initVis = function(){
 };
 
 Timeline.prototype.wrangleData = function () {
-    console.log("Timeline.prototype.wrangleData");
+    //console.log("Timeline.prototype.wrangleData");
 
     var vis = this;
-    console.log("Timeline.prototype.wrangleData");
+
+    // initail the timeline by numconf value
+    // vis.variable = "numdeaths"
     vis.variable = "numconf"
 
     vis.dayNest = d3.nest()
@@ -75,7 +78,7 @@ Timeline.prototype.wrangleData = function () {
 
 Timeline.prototype.updateVis = function(){
     var vis = this;
-    console.log("Timeline.prototype.updateVis");
+    //console.log("Timeline.prototype.updateVis");
 
     vis.x.domain(d3.extent(vis.dataFiltered, (d) => { return common_parseTime(d.date); }));
     vis.y.domain([0, d3.max(vis.dataFiltered, (d) => d.sum) ])
