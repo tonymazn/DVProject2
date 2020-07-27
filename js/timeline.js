@@ -24,6 +24,9 @@ Timeline.prototype.initVis = function () {
     vis.x = d3.scaleTime()
         .range([0, vis.width]);
 
+    //vis.y = d3.scaleLog()
+    //    .range([vis.height, 0]);
+
     vis.y = d3.scaleLinear()
         .range([vis.height, 0]);
 
@@ -36,6 +39,7 @@ Timeline.prototype.initVis = function () {
 
     vis.areaPath = vis.g.append("path")
         .attr("fill", "#ccc");
+        //.attr("fill", "#C0C0C0");
 
     vis.brush = d3.brushX()
         .handleSize(10)
@@ -72,6 +76,9 @@ Timeline.prototype.wrangleData = function () {
             }
 
         })
+
+    //console.log("vis.dataFiltered");
+    //console.log(vis.dataFiltered);
 
     vis.updateVis();
 }

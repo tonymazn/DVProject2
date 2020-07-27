@@ -78,6 +78,9 @@ BarChart.prototype.wrangleData = function(){
         }
     })
 
+    //console.log("vis.dataFiltered");
+    //console.log(vis.dataFiltered);
+
     vis.updateVis();
 };
 
@@ -108,17 +111,18 @@ BarChart.prototype.updateVis = function(){
 
     vis.rects.attr("class", "update")
         .transition(vis.t())
-            .attr("y", function(d){ return vis.y(d.size); })
-            .attr("height", function(d){ return (vis.height - vis.y(d.size)); })
-            .attr("x", function(d){ return vis.x(d.category) })
-            .attr("width", vis.x.bandwidth)
+        .attr("y", function (d) { return vis.y(d.size); })
+        .attr("height", function (d) { return (vis.height - vis.y(d.size)); })
+        .attr("x", function (d) { return vis.x(d.category) })
+        .attr("width", vis.x.bandwidth);
 
     vis.rects.enter()
         .append("rect")
         .attr("class", "enter")
-        .attr("y", function(d){ return vis.y(d.size); })
-        .attr("height", function(d){ return (vis.height - vis.y(d.size)); })
-        .attr("x", function(d){ return vis.x(d.category) })
+        .attr("y", function (d) { return vis.y(d.size); })
+        .attr("height", function (d) { return (vis.height - vis.y(d.size)); })
+        .attr("x", function (d) { return vis.x(d.category) })
         .attr("width", vis.x.bandwidth)
-        .attr("fill", "grey")
+        .attr("fill", "grey");
+        //.attr("fill", "black");
 };
