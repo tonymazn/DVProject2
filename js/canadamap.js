@@ -84,12 +84,16 @@ CanadaMap.prototype.initVis = function () {
 
     d3.json("data/canadamap.json").then(function (data) {
         canadamap_mapdata = data;
-//        console.log("canadamap_mapdata");
-//        console.log(canadamap_mapdata);
+        //        console.log("canadamap_mapdata");
+        //        console.log(canadamap_mapdata);
         vis.updateVis(null);
+    }).catch(function () {
+        console.log("error loading file canadamap.json, please press F5 and try again");
     });
 
 }
+
+
 
 function getColorLevel(item) {
     if (item <= 0) {

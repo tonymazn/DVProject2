@@ -159,7 +159,9 @@ Page1.prototype.initVis = function (_parentElement, _parameters) {
         // First run of the visualization
         update(page1_formattedData[0]);
 
-    })
+    }).catch(function () {
+        console.log("error loading file canadacovid19.csv, please press F5 and try again");
+    });
 
     $(_parentElement)
         .on("click", "#play-button", function () {
@@ -171,7 +173,7 @@ Page1.prototype.initVis = function (_parentElement, _parameters) {
                 button.text("Play");
                 clearInterval(page1_interval);
             }
-        })
+        });
 
 
 
@@ -179,7 +181,7 @@ Page1.prototype.initVis = function (_parentElement, _parameters) {
         .on("click", "#reset-button", function () {
             page1_time = 0;
             update(page1_formattedData[0]);
-        })
+        });
 }
 
 Page1.prototype.trigger = function (_parameters) {

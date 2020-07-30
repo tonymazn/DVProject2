@@ -45,7 +45,9 @@ Page2.prototype.initVis = function (_parentElement, _parameters) {
             _parameters.type = $("#var-select").val();
             changeDates([_parameters.startDate, _parameters.endDate])
         })
-    })
+    }).catch (function () {
+        console.log("error loading file canadacovid19.csv, please press F5 and try again");
+    });
 }
 
 Page2.prototype.trigger = function (_parameters) {
