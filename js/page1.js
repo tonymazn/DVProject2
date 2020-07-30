@@ -7,6 +7,7 @@ var page1_interval;
 var page1_x;
 var page1_y;
 var page1_timeLabel;
+var div;
 
 Page1 = function (_parentElement, _parameters) {
     this._parentElement = _parentElement;
@@ -111,6 +112,9 @@ Page1.prototype.initVis = function (_parentElement, _parameters) {
         .attr("class", "y axis")
         .call(yAxisCall);
 
+    div = d3.select(_parentElement).append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
     //legend
     var legend = page1_g.append("g")
@@ -218,11 +222,62 @@ function update(data) {
             .attr("cx", function (d) { return page1_x(d.numconf + 100); })
             .attr("r", function (d) { return Math.sqrt(page1_area(d.numtested) / Math.PI); });
 
+        circles
+            .on("mouseover", function (d) {
+                div.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                div.html(d.prname + "<br/>")
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on("mouseout", function (d) {
+                div.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            });
+
         // Update the time label
         page1_timeLabel.text(data[0].date);
     } catch{
     }
 }
+
+
+//Show the tooltip on the hovered over slice
+function showTooltip(d) {
+
+    //Define and show the tooltip
+    $(this).popover({
+        placement: 'auto top',
+        container: '#chart',
+        trigger: 'manual',
+        html: true,
+        content: function () {
+            return "<span style='font-size: 11px; text-align: center;'>" + d.Country + "</span>";
+        }
+    });
+    $(this).popover('show');
+
+    //Make chosen circle more visible
+    d3.select(this).style("opacity", 1);
+
+}//function showTooltip
+
+
+
+//Hide the tooltip when the mouse moves away
+function removeTooltip() {
+
+    //Fade out the circle to normal opacity
+    d3.select(this).style("opacity", opacityCircles);
+
+    //Hide tooltip
+    $('.popover').each(function () {
+        $(this).remove();
+    });
+
+}//function removeTooltip
 
 
 
