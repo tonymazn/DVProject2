@@ -21,8 +21,6 @@ CanadaMap.prototype.initVis = function () {
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom);
 
-    var numberofcase = d3.map();
-
     var x = d3.scaleLinear()
         .domain([1, 10])
         .rangeRound([height, width]);
@@ -82,22 +80,13 @@ CanadaMap.prototype.initVis = function () {
         .tickValues(canadamap_color.domain()))
         .select(".domain")
         .remove();
-
     //End of legend
 
-    //read data
-    var promises = [
-        d3.json("data/can.json"),
-        d3.tsv("data/map.tsv", function (d) { numberofcase.set(d.id, +d.rate); })
-    ]
-
-    Promise.all(promises).then(function (data) {
-        canadamap_mapdata = data[0];
+    d3.json("data/canadamap.json").then(function (data) {
+        canadamap_mapdata = data;
 //        console.log("canadamap_mapdata");
 //        console.log(canadamap_mapdata);
         vis.updateVis(null);
-    }).catch(function (error) {
-        console.log(error);
     });
 
 }
